@@ -24,7 +24,7 @@ Hosted on https://enacit4r-cdn.epfl.ch/
 
    Answers :
 
-   - Access Key : documented in enacit-linux-sysadmins KeeWeb
+   - Access Key : documented in enacit4r KeeWeb
    - Secret Key : idem
    - Region : keep default
    - S3 Endpoint : s3.epfl.ch
