@@ -1,3 +1,4 @@
 /s3_storage/
 *.key
 *.crt
+.env
