@@ -1,19 +1,19 @@
-proxy_cache_path /etc/nginx/cache levels=1:2 keys_zone=enacit4r:64M max_size=14G inactive=72h use_temp_path=off;
+proxy_cache_path /etc/nginx/cache levels=1:2 keys_zone=enacit4r:128M max_size=12G inactive=1y use_temp_path=off;
 
 aio threads; # Enable AIO
 # Use direct IO for large files to avoid excessive buffering
-directio 16M; # Set DirectIO size
+directio 32M; # Set DirectIO size
 # Adjust output buffers for large file transfers
 output_buffers 2 1M; # Output buffer settings
 
-# Disable buffer for large file downloads
-proxy_buffering off;
+# Enable buffer for large file downloads
+proxy_buffering on;
 
 # Set the max file size for uploads and downloads
 client_max_body_size 500M; # Adjust this value as needed
 
 # Optimize sendfile for large file transfers
-sendfile_max_chunk 512K; # Limiting the chunk size can help with large files
+sendfile_max_chunk 1M; # Limiting the chunk size can help with large files
 
 # Adjust the timeout values
 client_body_timeout 120s;
@@ -98,7 +98,8 @@ server {
       proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
       add_header X-Proxy-Cache $upstream_cache_status;
 
-      proxy_cache_valid 200 10m;
+      proxy_ignore_headers Cache-Control Expires;
+      proxy_cache_valid 200 201 202 203 204 205 206 1y;
       proxy_cache_bypass $arg_should_bypass_cache;
       proxy_cache_methods GET HEAD;
       proxy_cache_min_uses 1;
