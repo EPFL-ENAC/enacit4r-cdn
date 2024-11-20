@@ -28,6 +28,14 @@ server {
     listen ${NGINX_PORT};
     server_name ${NGINX_HOST};
 
+    #gzip
+    gzip on;
+    gzip_min_length 1k;       # Minimum size to compress (1 KB is a good starting point)
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss image/svg+xml;
+    gzip_comp_level 5;        # Compression level (1-9, tradeoff between speed and compression ratio)
+    gzip_buffers 16 8k;       # Buffers for compression
+    gzip_vary on;             # Enable Vary header for client-side caching
+
     error_page 403 =404 @not_found;
     error_page      404 @not_found;
 
