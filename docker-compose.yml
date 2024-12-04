@@ -12,7 +12,6 @@ services:
       - S3_BUCKET_NAME=${S3_BUCKET_NAME}
     volumes:
       - ./nginxTemplates:/etc/nginx/templates
-      - ./nginxCache:/etc/nginx/cache
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.s3fs-enacit4r-cdn.tls=true"
