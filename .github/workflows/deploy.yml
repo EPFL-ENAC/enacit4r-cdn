@@ -16,8 +16,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: EPFL-ENAC/epfl-enac-build-push-deploy-action@v1.0.0
+      - uses: EPFL-ENAC/epfl-enac-build-push-deploy-action@main
         with:
-          ENAC_IT4R_CD_ORG: "org name given by ENAC-IT: e.g. : epfl-enac or epfl-lasur"
-          ENAC_IT4R_CD_REPO: "app name given by ENAC-IT: e.g. : my-app"
+          ENAC_IT4R_CD_ORG: "epfl-enac"
+          ENAC_IT4R_CD_REPO: "enacit4r-cdn"
           ENAC_IT4R_CD_TOKEN: ${{ secrets.ENAC_IT4R_CD_TOKEN }}
