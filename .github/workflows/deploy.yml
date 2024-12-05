@@ -20,3 +20,4 @@ jobs:
       # Optional inputs can be passed here
       ORG: "epfl-enac"
       REPO: "enacit4r-cdn"
+      build_context: '["./"]' # Optional"
