@@ -14,10 +14,9 @@ name: deploy
     
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: EPFL-ENAC/epfl-enac-build-push-deploy-action/.github/workflows/deploy.yml@main
-        with:
-          ENAC_IT4R_CD_ORG: "epfl-enac"
-          ENAC_IT4R_CD_REPO: "enacit4r-cdn"
-          ENAC_IT4R_CD_TOKEN: ${{ secrets.ENAC_IT4R_CD_TOKEN }}
+    uses: EPFL-ENAC/epfl-enac-build-push-deploy-action/.github/workflows/deploy.yml@main
+    with:
+      # Optional inputs can be passed here
+      ORG: "epfl-enac"
+      REPO: "enacit4r-cdn"
+      TOKEN: ${{ secrets.ENAC_IT4R_CD_TOKEN }}
