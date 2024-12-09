@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enacit4r-cdn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enacit4r-cdn
+  template:
+    metadata:
+      labels:
+        app: enacit4r-cdn
+    spec:
+      containers:
+      - name: nginx
+        image: your-docker-username/enacit4r-cdn:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: NGINX_PORT
+          value: "80"
+        - name: NGINX_HOST
+          value: "your-nginx-host"
+        - name: DNS
+          value: "your-dns"
+        - name: S3_ENDPOINT_PROTOCOL
+          value: "https://"
+        - name: S3_ENDPOINT_HOSTNAME
+          value: "your-s3-endpoint-hostname"
+        - name: S3_BUCKET_NAME
+          value: "your-s3-bucket-name"
