@@ -15,7 +15,7 @@ jobs:
   deploy:
     uses: EPFL-ENAC/epfl-enac-build-push-deploy-action/.github/workflows/deploy.yml@main
     secrets:
-      TOKEN: ${{ secrets.ENAC_IT4R_CD_TOKEN }}
+      TOKEN: ${{ secrets.CD_TOKEN }}
     with:
       # Optional inputs can be passed here
       ORG: "epfl-enac"
