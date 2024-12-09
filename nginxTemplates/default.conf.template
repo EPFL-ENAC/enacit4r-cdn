@@ -85,10 +85,10 @@ server {
         
     }
 
-     # For the /utnc-viz location
-    location  ~ ^/utnc-viz/(.*)$ {
+     # For the /urbes-viz location
+    location  ~ ^/urbes-viz/(.*)$ {
         include /etc/nginx/conf.d/proxy_settings.conf;
-        proxy_pass ${S3_ENDPOINT_PROTOCOL}${S3_ENDPOINT_HOSTNAME}/${S3_UTNC_VIZ_BUCKET_NAME}/$1;
+        proxy_pass ${S3_ENDPOINT_PROTOCOL}${S3_ENDPOINT_HOSTNAME}/${S3_URBES_VIZ_BUCKET_NAME}/$1;
     }
  
 
