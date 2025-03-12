@@ -91,19 +91,30 @@ server {
         proxy_pass ${S3_ENDPOINT_PROTOCOL}${S3_ENDPOINT_HOSTNAME}/${S3_URBES_VIZ_BUCKET_NAME}/$1;
     }
 
-
     # For the /bluecity location - protected with API key
     location ~ ^/bluecity/(.*)$ {
-        # API key authentication
-        if ($arg_apikey != "${BLUECITY_API_KEY}" && $http_x_api_key != "${BLUECITY_API_KEY}") {
-            return 403;
+
+
+        # Simple API key check (uncomment to enable)
+        set $api_key_valid 0;
+        
+        if ($arg_apikey = "${BLUECITY_API_KEY}") {
+            set $api_key_valid 1;
         }
         
+        if ($http_x_api_key = "${BLUECITY_API_KEY}") {
+            set $api_key_valid 1;
+        }
+        
+        if ($api_key_valid = 0) {
+            return 403;
+        }
+
+
         # CORS headers
         add_header 'Access-Control-Allow-Origin' '*' always;
-        add_header 'Access-Control-Allow-Credentials' 'true' always;
-        add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range,X-Api-Key' always;
         add_header 'Access-Control-Allow-Methods' 'GET,OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,X-Requested-With,Content-Type,X-Api-Key' always;
 
         # Handle OPTIONS requests
         if ($request_method = 'OPTIONS') {
@@ -113,8 +124,10 @@ server {
             return 204;
         }
 
+        
+
         include /etc/nginx/conf.d/proxy_settings.conf;
-        proxy_pass ${S3_ENDPOINT_PROTOCOL}${S3_ENDPOINT_HOSTNAME}/${S3_BUCKET_NAME}/$1;
+        proxy_pass ${S3_ENDPOINT_PROTOCOL}${S3_ENDPOINT_HOSTNAME}/${S3_BUCKET_NAME}/bluecity/$1;
     }
  
 
