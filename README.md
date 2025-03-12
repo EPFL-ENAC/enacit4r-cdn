@@ -48,3 +48,29 @@ Hosted on https://enacit4r-cdn.epfl.ch/
 4. Use it
 
 https://enacit4r-cdn.epfl.ch/myProject/2022-05-08/path/to/my/file
+
+# Local Development Setup
+
+To run this service locally for development or testing purposes:
+
+1. Create a `.env` file (or modify your existing one) with the variables found in `.env.example`:
+
+2. Generate self-signed certificates (if needed):
+
+   ```bash
+   make generate-selfsigned-cert
+   ```
+
+3. Start the service:
+
+   ```bash
+   make run
+   ```
+
+4. Test access:
+
+   ```bash
+   curl -k https://localhost/path/to/resource
+   ```
+
+   Note: The `-k` flag is needed to accept the self-signed certificate.
